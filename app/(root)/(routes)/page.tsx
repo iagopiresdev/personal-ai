@@ -1,5 +1,6 @@
 'use client';
 
+import { ChatForm } from '@/components/ui/chat';
 import { UserButton } from '@clerk/nextjs';
 import { useChat } from 'ai/react';
 
@@ -9,6 +10,7 @@ export default function MyComponent() {
   return (
     <div>
         <UserButton />
+        < ChatForm input={input} handleInputChange={handleInputChange} onSubmit={handleSubmit} isLoading={false} />
       <ul>
         {messages.map((m, index) => (
           <li key={index}>
