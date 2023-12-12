@@ -1,12 +1,14 @@
 'use client';
- 
+
+import { UserButton } from '@clerk/nextjs';
 import { useChat } from 'ai/react';
- 
+
 export default function MyComponent() {
   const { messages, input, handleInputChange, handleSubmit } = useChat();
- 
+
   return (
     <div>
+        <UserButton />
       <ul>
         {messages.map((m, index) => (
           <li key={index}>
@@ -15,7 +17,6 @@ export default function MyComponent() {
           </li>
         ))}
       </ul>
- 
       <form onSubmit={handleSubmit}>
         <label>
           Say something...
