@@ -16,11 +16,18 @@ export const SearchInput = () => {
   const categoryId = searchParams.get("categoryId");
   const name = searchParams.get("name");
 
+  const [showPlaceholder, setShowPlaceholder] = useState<boolean>(false);
+
   const [value, setValue] = useState(name || "");
   const debouncedValue = useDebounce<string>(value, 500);
 
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    if(e.target.value === ""){
+      setShowPlaceholder(false)
+    } else {
+      setShowPlaceholder(true)
+    }
     setValue(e.target.value);
   };
 
@@ -41,21 +48,24 @@ export const SearchInput = () => {
   return (
     <div className="w-full flex justify-center">
       <div className="relative">
-        <div className="h-72 w-72 rounded-full bg-search flex flex-col gap-7 items-center">
-          <SlMagnifier className="text-4xl mt-16"/>
+        <div className="h-72 w-72 rounded-full flex flex-col gap-7 items-center relative">
+          <div className="absolute bg-search h-full w-full rounded-full blur-sm"/>
+          <SlMagnifier className="text-4xl mt-16 relative"/>
           <div className="relative">
-            <div className="w-full absolute flex gap-2 items-center justify-center left-0 top-0 translate-y-[25%] transform">
-            <h4 className="text-[#9B9B9B] text-center text-xl font-normal">
-              Search
-            </h4>
-            <h4 className="font-bold">
-              opportunities
-            </h4>
-            </div>
+            {!showPlaceholder &&
+              <div className="w-full absolute flex gap-2 items-center justify-center left-0 top-0 translate-y-[30%] transform">
+                <h4 className="text-[#9B9B9B] text-xl font-normal">
+                  Search
+                </h4>
+                <h4 className="text-[#9B9B9B] text-xl font-bold">
+                  opportunities
+                </h4>
+              </div>
+            }
             <Input
               onChange={onChange}
               value={value}
-              className="pl-10 w-80 bg-transparent"
+              className="px-14 py-5 w-80 bg-transparent border-[3px] border-black rounded-xl"
               />
           </div>
         </div>

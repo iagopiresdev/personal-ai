@@ -1,7 +1,7 @@
 'use client';
 
 import { openAiCall } from "@/app/api/chat/workout/route";
-import { Input } from "@/components/ui/input";
+import { TextArea } from "@/components/ui/input";
 import { useState } from "react";
 
 type workoutFormType = {
@@ -63,52 +63,16 @@ const workoutForm: workoutFormType = [
         label: "Month Extension",
     },
     {
-        header: "Can you describe your typical daily diet?",
-        label: "Dietary Habits",
-    },
-    {
         header: "Are there any specific exercises you really enjoy or really dislike?",
         label: "Specific Exercises",
     },
     {
-        header: "Are there any physical limitations or pain points I should be aware of when creating your workout plan?",
+        header: "Do you have any injuries, physical limitations, chronic conditions or pain points I should be aware of when creating your workout plan?",
         label: "Physical Limitations",
     },
     {
-        header: "What is your occupation, and how physically active are you during the day?",
-        label: "Lifestyle Factors",
-    },
-    {
-        header: "How would you rate your daily stress levels, and do they impact your ability to exercise?",
-        label: "Stress Levels",
-    },
-    {
-        header: "How many hours of sleep do you typically get each night?",
-        label: "Sleep Patterns",
-    },
-    {
-        header: "On a scale from 1 to 10, how would you rate your current motivation levels for working out?",
-        label: "Motivation Levels",
-    },
-    {
-        header: "Have you had any injuries in the past that might affect your ability to perform certain exercises?",
-        label: "Previous Injuries",
-    },
-    {
-        header: "Do you have any chronic conditions (like asthma, diabetes, etc.) that need to be considered in your workout plan?",
-        label: "Chronic Conditions",
-    },
-    {
-        header: "Are you allergic to any substances that might affect your workout environment or recovery (like latex, certain foods, etc.)?",
-        label: "Allergies",
-    },
-    {
-        header: "Do you prefer working out in the morning, afternoon, or evening?",
-        label: "Workout Schedule Preferences",
-    },
-    {
-        header: "If you've followed workout programs in the past, what did you like or dislike about them?",
-        label: "Feedback on Past Programs",
+        header: "Would you like to add anything else?",
+        label: "Add Information",
     }
 ];
 
@@ -140,29 +104,39 @@ export default function Workout() {
     }
 
 
-    return <div>
+    return <div className="h-full flex justify-center items-center">
                 {showQuestion === workoutForm.length && <div className="flex flex-col gap-4">
                     {response}
                 </div>
                 }
                 <form
                     onSubmit={onHandleSubmit}
-                    className="flex flex-col gap-4"
+                    className="flex flex-col gap-4 h-full w-full justify-center items-center"
                 >
                     {workoutForm.map((question, index) => {
                         return <>
                                 { showQuestion === index &&
-                                    <div className="flex flex-col gap-6">
-                                        <h2>{question.header}</h2>
-                                        <div className="flex gap-2">
-                                            <Input
-                                            label={question.label} 
-                                            name={question.header}
-                                            onChange={handleChange}
+                                    <div className="flex flex-col gap-6 justify-center w-full">
+                                        <h2 className="text-center text-lg">{question.header}</h2>
+                                        <div className="flex flex-col gap-2 items-center w-full">
+                                            <TextArea
+                                                rows={3}
+                                                placeholder={question.label} 
+                                                name={question.header}
+                                                className="border-2 border-black bg-transparent w-full h-25"
+                                                onChange={handleChange}
                                             />
                                             {index !== workoutForm.length-1 && <button
                                                 onClick={()=>setShowQuestion(index + 1)}
-                                                className="w-fit"
+                                                className="
+                                                text-white
+                                                h-16
+                                                min-h-[64px]
+                                                min-w-[64px]
+                                                w-16
+                                                rounded-full
+                                                bg-black
+                                                hover:opacity-75"
                                             >
                                                 next
                                             </button>}
@@ -174,6 +148,15 @@ export default function Workout() {
                     {showQuestion === (workoutForm.length-1) && 
                         <button
                             type="submit"
+                            className="
+                            text-white
+                            h-16
+                            min-h-[64px]
+                            min-w-[64px]
+                            w-16
+                            rounded-full
+                            bg-[#FF2800]
+                            hover:opacity-75"
                         >
                             Send
                         </button>}
