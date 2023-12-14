@@ -1,14 +1,10 @@
 "use client";
 
-import db from "@/lib/drizzle";
-import { cn } from "@/lib/utils";
+import { Category } from "@prisma/client";
 import { useRouter, useSearchParams } from "next/navigation";
 import qs from "query-string";
 
-db.select().from('categories');
-
-
-
+import { cn } from "@/lib/utils";
 
 interface CategoriesProps {
   data: Category[]
@@ -72,7 +68,7 @@ export const Categories = ({
             md:py-3 
             rounded-md 
             bg-primary/10 
-            hover:opacity-75 
+            hover:opacity-75
             transition
           `,
             item.id === categoryId ? 'bg-primary/25' : 'bg-primary/10'
