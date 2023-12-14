@@ -13,6 +13,8 @@ module.exports = {
       backgroundImage: {
         "card-bot":
             "linear-gradient(143deg, #90B9A1 1.49%, #3EAB7D 97.29%)",
+        "search":
+            "linear-gradient(37deg, #E6E6E6 12.22%, #FFF 91.94%)",
       },
     },
   },

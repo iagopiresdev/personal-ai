@@ -25,12 +25,13 @@ export const DBFetcher = async ({
       }
     },
   });
-
+  
   const categories = await prismadb.category.findMany();
   
   return (
     <div className="h-full p-4 space-y-2">
       <Categories data={categories} />
+      <div className="h-24"/>
       <SearchInput />
       <Personas data={data} />
     </div>

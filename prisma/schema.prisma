@@ -20,7 +20,7 @@ model Persona {
     userId      String
     userName    String
     src         String
-    name        String @db.Text
+    name        String @db.Text 
     description String
     context     String @db.Text
     seed        String @db.Text
@@ -34,6 +34,7 @@ model Persona {
     messages Message[]
 
     @@index([categoryId])
+    @@fulltext([name])
 }
 
 enum Role {
