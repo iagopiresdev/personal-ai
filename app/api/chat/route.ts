@@ -9,6 +9,7 @@ const openai = new OpenAI({
 })
 
 export async function POST(req: Request) {
+  console.log("hello")
   const json = await req.json()
   const { messages, previewToken } = json
 

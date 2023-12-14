@@ -9,7 +9,7 @@ export default function RootLayout({
   return (
     <ClerkProvider >
       <html lang="en">
-        <body>{children}</body>
+        <body className='px-4 pt-6 pb-10'>{children}</body>
       </html>
     </ClerkProvider>
   )

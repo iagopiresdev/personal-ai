@@ -9,7 +9,12 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        "card-bot":
+            "linear-gradient(143deg, #90B9A1 1.49%, #3EAB7D 97.29%)",
+      },
+    },
   },
   plugins: [],
 }
