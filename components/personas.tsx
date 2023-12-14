@@ -1,11 +1,11 @@
+import { Persona } from "@prisma/client";
 import { MessagesSquare } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { Card, CardFooter, CardHeader } from "@/components/ui/card";
 
-
-interface CompanionsProps {
+interface PersonasProps {
   data: (Persona & {
     _count: {
       messages: number
@@ -13,9 +13,9 @@ interface CompanionsProps {
   })[];
 }
 
-export const Companions = ({
+export const Personas = ({
   data
-}: CompanionsProps) => {
+}: PersonasProps) => {
   if (data.length === 0) {
     return (
       <div className="pt-10 flex flex-col items-center justify-center space-y-3">
@@ -27,7 +27,7 @@ export const Companions = ({
             alt="Empty"
           />
         </div>
-        <p className="text-sm text-muted-foreground">No companions found.</p>
+        <p className="text-sm text-muted-foreground">No Personas found.</p>
       </div>
     )
   }
