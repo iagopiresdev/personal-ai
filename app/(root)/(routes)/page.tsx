@@ -1,21 +1,47 @@
-'use client';
+import { Categories } from "@/components/categories";
+import { Companions } from "@/components/personas";
+import { SearchInput } from "@/components/search-input";
+import db from "@/lib/drizzle";
+import prismadb from "@/lib/prismadb";
 
-import { BotCard } from '@/components/ui/card';
-import { WorkoutIcon } from '@/components/ui/icons/workout';
-import { UserButton } from '@clerk/nextjs';
+interface RootPageProps {
+  searchParams: {
+    categoryId: string;
+    name: string;
+  };
+};
 
-export default function MyComponent() {
+const RootPage = async ({
+  searchParams
+}: RootPageProps) => {
+  const data = await prismadb.persona.findMany({
+    where: {
+      categoryId: searchParams.categoryId,
+      name: {
+        search: searchParams.name,
+      },
+    },
+    orderBy: {
+      createdAt: "desc"
+    },
+    include: {
+      _count: {
+        select: {
+          messages: true,
+        }
+      }
+    },
+  });
+
+  const categories = await db.select().from();
 
   return (
-    <div className='h-screen flex flex-col justify-between p-4 w-screen'>
-        <UserButton />
-        <div className='h-full w-full flex wrap p-6'>
-          <BotCard
-            link="/bots/workout"
-            className='bg-card-bot'>
-              <WorkoutIcon className='fill-transparent'/>
-          </BotCard>
-        </div>
+    <div className="h-full p-4 space-y-2">
+      <SearchInput />
+      <Categories data={categories} />
+      <Companions data={data} />
     </div>
-  );
+  )
 }
+
+export default RootPage
