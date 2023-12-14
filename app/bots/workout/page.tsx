@@ -143,16 +143,6 @@ export default function Workout() {
     return <div>
                 {showQuestion === workoutForm.length && <div className="flex flex-col gap-4">
                     {response}
-                    <div className="flex flex-col gap-3">
-                        {mockData.questions.map((question)=>{
-                            return <div>{question.question + " :" + question.answer}</div>
-                        })}
-                    </div>
-                    <div className="flex gap-3">
-                        {mockData.questions.map((question)=>{
-                            return <div>{question.question + " :" + question.answer}</div>
-                        })}
-                    </div>
                 </div>
                 }
                 <form

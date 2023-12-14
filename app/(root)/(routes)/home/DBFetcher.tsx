@@ -1,8 +1,8 @@
 import { Categories } from "@/components/categories";
-import { Companions } from "@/components/personas";
+import { Personas } from "@/components/personas";
 import { SearchInput } from "@/components/search-input";
 import prismadb from "@/lib/prismadb";
-import { RootPageProps } from "../page";
+import { RootPageProps } from "../../../page";
 
 export const DBFetcher = async ({
   searchParams
@@ -30,9 +30,9 @@ export const DBFetcher = async ({
   
   return (
     <div className="h-full p-4 space-y-2">
-      <SearchInput />
       <Categories data={categories} />
-      <Companions data={data} />
+      <SearchInput />
+      <Personas data={data} />
     </div>
   )
 }

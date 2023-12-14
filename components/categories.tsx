@@ -30,54 +30,33 @@ export const Categories = ({
   };
 
   return (
-    <div className="w-full overflow-x-auto space-x-2 flex p-1">
-      <button
-        onClick={() => onClick(undefined)}
-        className={cn(`
-          flex 
-          items-center 
-          text-center 
-          text-xs 
-          md:text-sm 
-          px-2 
-          md:px-4 
-          py-2 
-          md:py-3 
-          rounded-md 
-          bg-primary/10 
-          hover:opacity-75 
-          transition
-        `,
-          !categoryId ? 'bg-primary/25' : 'bg-primary/10'
-        )}
-      >
-        Newest
-      </button>
-      {data.map((item) => (
-        <button
+    <section className="flex flex-col gap-4">
+      <h2 className="tex-black text-sm font-medium">Your AIs</h2>
+      <div className="w-full overflow-x-auto flex gap-5">
+        {data.map((item) => (
+          <button
           onClick={() => onClick(item.id)}
           className={cn(`
-            flex 
-            items-center 
-            text-center 
-            text-xs 
-            md:text-sm 
-            px-2 
-            md:px-4 
-            py-2 
-            md:py-3 
-            rounded-md 
-            bg-primary/10 
-            hover:opacity-75
-            transition
+          flex 
+          items-center
+          justify-center
+          h-16
+          w-16
+          rounded-full
+          bg-black
+          hover:opacity-75
+          transition
           `,
-            item.id === categoryId ? 'bg-primary/25' : 'bg-primary/10'
+          {'bg-primary/25' : item.id === categoryId}
           )}
           key={item.id}
-        >
-          {item.name}
-        </button>
-      ))}
-    </div>
+          >
+            <div>
+              {item.name}
+            </div>
+          </button>
+        ))}
+      </div>
+      </section>
   )
 }

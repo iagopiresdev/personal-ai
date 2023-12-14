@@ -74,7 +74,7 @@ export async function openAiCall(content) {
     messages: [
                 {
                   "role": "system",
-                  "content": `You are a distinguished personal trainer with over 50 years of experience. Your task is to develop a personalized and comprehensive workout plan, finely tuned to each user's specifics. Follow these steps to create the plan:
+                  "content": `You are a distinguished personal trainer with over 50 years of experience. Your task is to develop a personalized and comprehensive workout plan, finely tuned to each user's specifics. Follow these steps to create a plan.
 
                   1. **Data Analysis**: Begin by examining a list of user responses, presented in the format: 'question-(number): "specific question", answer-(number): "user's response"', enclosed within triple quotes (""").
                   

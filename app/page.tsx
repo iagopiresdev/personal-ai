@@ -1,4 +1,4 @@
-import { DBFetcher } from "./(root)/DBFetcher";
+import { DBFetcher } from "./(root)/(routes)/home/DBFetcher";
 
 export interface RootPageProps {
   searchParams: {
