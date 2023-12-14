@@ -10,7 +10,7 @@ interface RootPageProps {
   };
 };
 
-const RootPage = async ({
+export const RootPage = async ({
   searchParams
 }: RootPageProps) => {
   const data = await prismadb.persona.findMany({
@@ -43,4 +43,3 @@ const RootPage = async ({
   )
 }
 
-export default RootPage
