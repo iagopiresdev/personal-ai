@@ -2,15 +2,9 @@ import { Categories } from "@/components/categories";
 import { Companions } from "@/components/personas";
 import { SearchInput } from "@/components/search-input";
 import prismadb from "@/lib/prismadb";
+import { RootPageProps } from "../page";
 
-interface RootPageProps {
-  searchParams: {
-    categoryId: string;
-    name: string;
-  };
-};
-
-export const RootPage = async ({
+export const DBFetcher = async ({
   searchParams
 }: RootPageProps) => {
   const data = await prismadb.persona.findMany({
