@@ -1,31 +1,47 @@
-'use client';
+import { Categories } from "@/components/categories";
+import { Companions } from "@/components/personas";
+import { SearchInput } from "@/components/search-input";
+import db from "@/lib/drizzle";
+import prismadb from "@/lib/prismadb";
 
-import { ChatForm } from '@/components/ui/chat';
-import { UserButton } from '@clerk/nextjs';
-import { useChat } from 'ai/react';
+interface RootPageProps {
+  searchParams: {
+    categoryId: string;
+    name: string;
+  };
+};
 
-export default function MyComponent() {
-  const { messages, input, handleInputChange, handleSubmit } = useChat();
+const RootPage = async ({
+  searchParams
+}: RootPageProps) => {
+  const data = await prismadb.persona.findMany({
+    where: {
+      categoryId: searchParams.categoryId,
+      name: {
+        search: searchParams.name,
+      },
+    },
+    orderBy: {
+      createdAt: "desc"
+    },
+    include: {
+      _count: {
+        select: {
+          messages: true,
+        }
+      }
+    },
+  });
+
+  const categories = await db.select().from();
 
   return (
-    <div>
-        <UserButton />
-        < ChatForm input={input} handleInputChange={handleInputChange} onSubmit={handleSubmit} isLoading={false} />
-      <ul>
-        {messages.map((m, index) => (
-          <li key={index}>
-            {m.role === 'user' ? 'User: ' : 'AI: '}
-            {m.content}
-          </li>
-        ))}
-      </ul>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Say something...
-          <input value={input} onChange={handleInputChange} />
-        </label>
-        <button type="submit">Send</button>
-      </form>
+    <div className="h-full p-4 space-y-2">
+      <SearchInput />
+      <Categories data={categories} />
+      <Companions data={data} />
     </div>
-  );
+  )
 }
+
+export default RootPage
