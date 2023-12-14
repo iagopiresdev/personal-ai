@@ -1,7 +1,6 @@
 import { Categories } from "@/components/categories";
 import { Companions } from "@/components/personas";
 import { SearchInput } from "@/components/search-input";
-import db from "@/lib/drizzle";
 import prismadb from "@/lib/prismadb";
 
 interface RootPageProps {
@@ -33,8 +32,8 @@ const RootPage = async ({
     },
   });
 
-  const categories = await db.select().from();
-
+  const categories = await prismadb.category.findMany();
+  
   return (
     <div className="h-full p-4 space-y-2">
       <SearchInput />
